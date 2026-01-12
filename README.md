@@ -72,10 +72,10 @@ python main.py --acao ferramentas
 
 ```bash
 # Backup simples
-python main.py --acao backup --diretorio ./meu-projeto --destino ./backups
+python main.py --acao backup --diretorio ./diretorio-origem --destino ./backups
 
 # Backup compactado (ZIP)
-python main.py --acao backup --diretorio ./meu-projeto --destino ./backups --compactar
+python main.py --acao backup --diretorio ./diretorio-origem --destino ./backups --compactar
 ```
 
 #### 📋 Gerenciar Backups
