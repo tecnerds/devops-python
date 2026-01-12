@@ -1,91 +1,177 @@
-# Python para Automação em DevOps - Atividade Final
+# 🚀 DevOps Automation Tool
 
-## 📋 Descrição
+Ferramenta de automação para tarefas DevOps desenvolvida em Python.
 
-Este projeto demonstra automações comuns em DevOps usando Python, incluindo:
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-- ✅ Verificação de ambiente e ferramentas
-- ✅ Automação de comandos Git
-- ✅ Automação de operações Docker
-- ✅ Criação de estrutura de projetos
-- ✅ Monitoramento de recursos do sistema
-- ✅ Gerenciamento de arquivos
+---
 
-## 🚀 Como Usar
+## 📋 Sobre o Projeto
 
-### Instalação
+Este projeto oferece uma CLI (Command Line Interface) para automatizar tarefas comuns em ambientes DevOps:
+
+| Funcionalidade       | Descrição                                                       |
+| -------------------- | --------------------------------------------------------------- |
+| 💾 **Backup**        | Backup de diretórios com opção de compactação ZIP               |
+| 🔧 **Ferramentas**   | Verificação de ferramentas instaladas (Git, Docker, Node, etc.) |
+| 📊 **Monitoramento** | Monitoramento de CPU, memória e disco                           |
+| 📁 **Projetos**      | Criação de estrutura padrão de projetos DevOps                  |
+| 🐳 **Docker**        | Automação de operações com containers                           |
+| 🔀 **Git**           | Automação de comandos Git                                       |
+
+---
+
+## ⚙️ Instalação
+
+### Pré-requisitos
+
+- Python 3.8 ou superior
+
+### Passos
 
 ```bash
 # Clone o repositório
-git clone <url-do-repositorio>
+git clone https://github.com/tecnerds/devops-python.git
+cd devops-python
+
+# Crie um ambiente virtual (opcional, mas recomendado)
+python -m venv venv
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 
 # Instale as dependências
 pip install -r requirements.txt
 ```
 
-### Execução
+---
+
+## 🎯 Como Usar
+
+### Comandos Disponíveis
 
 ```bash
-# Ver informações do sistema
+python main.py --acao <comando> [opções]
+```
+
+### Exemplos
+
+#### 📋 Informações do Sistema
+
+```bash
 python main.py --acao info
+```
 
-# Verificar ferramentas DevOps instaladas
+#### 🔧 Verificar Ferramentas DevOps
+
+```bash
 python main.py --acao ferramentas
+```
 
-# Criar estrutura de novo projeto
-python main.py --acao criar-projeto --projeto meu_app
+#### 💾 Realizar Backup
 
-# Listar arquivos Python
-python main.py --acao listar --diretorio .
+```bash
+# Backup simples
+python main.py --acao backup --diretorio ./meu-projeto --destino ./backups
 
-# Monitorar recursos do sistema
+# Backup compactado (ZIP)
+python main.py --acao backup --diretorio ./meu-projeto --destino ./backups --compactar
+```
+
+#### 📋 Gerenciar Backups
+
+```bash
+# Listar backups existentes
+python main.py --acao listar-backups --destino ./backups
+
+# Limpar backups com mais de 30 dias
+python main.py --acao limpar-backups --destino ./backups --dias 30
+```
+
+#### 📊 Monitorar Recursos
+
+```bash
 python main.py --acao monitorar
 ```
 
-## 📁 Estrutura do Projeto
+#### 📁 Criar Novo Projeto
+
+```bash
+python main.py --acao criar-projeto --projeto meu-novo-projeto
+```
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```
-DevOps/
-├── main.py              # Script principal
-├── requirements.txt     # Dependências
-├── README.md           # Este arquivo
-├── utils/              # Módulos utilitários
+devops-python/
+├── main.py              # Script principal (CLI)
+├── requirements.txt     # Dependências do projeto
+├── README.md
+│
+├── utils/               # Módulos utilitários
 │   ├── __init__.py
-│   ├── git_utils.py    # Automação Git
-│   └── docker_utils.py # Automação Docker
-└── tests/              # Testes unitários
-    └── test_main.py
+│   ├── backup.py        # Funções de backup
+│   ├── logger.py        # Configuração de logs
+│   ├── sistema.py       # Informações do sistema
+│   ├── projeto.py       # Gerenciamento de projetos
+│   ├── docker_utils.py  # Operações Docker
+│   └── git_utils.py     # Operações Git
+│
+├── tests/               # Testes automatizados
+│   └── test_main.py
+│
+└── doc/                 # Documentação adicional
 ```
+
+---
 
 ## 🧪 Testes
 
 ```bash
-# Executar todos os testes
+# Executar testes
 pytest tests/ -v
 
-# Com cobertura
-pytest tests/ --cov=. --cov-report=html
+# Com relatório de cobertura
+pytest tests/ --cov=utils --cov-report=html
 ```
 
-## 🔧 Ferramentas Utilizadas
+---
 
-- **Python 3.8+**: Linguagem principal
-- **subprocess**: Execução de comandos do sistema
-- **pathlib**: Manipulação de arquivos e diretórios
-- **argparse**: Interface de linha de comando
-- **logging**: Registro de logs
-- **pytest**: Framework de testes
+## 📦 Dependências
 
-## 📚 Referências
+| Pacote   | Descrição                            |
+| -------- | ------------------------------------ |
+| `pytest` | Framework de testes                  |
+| `psutil` | Monitoramento de recursos do sistema |
 
-- [Documentação Python - sys](https://docs.python.org/3/library/sys.html)
-- [Documentação Python - subprocess](https://docs.python.org/3/library/subprocess.html)
-- [Documentação Python - pathlib](https://docs.python.org/3/library/pathlib.html)
+---
+
+## 🤝 Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
+
+---
 
 ## 👤 Autor
+
+**Patrick**
 
 Desenvolvido como atividade final do curso **Python para Automação em DevOps**.
 
 ---
 
-_Dezembro 2025_
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+---
+
+<p align="center">
+  <i>Dezembro 2025</i>
+</p>
