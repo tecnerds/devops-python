@@ -11,14 +11,12 @@ Ferramenta de automação para tarefas DevOps desenvolvida em Python.
 
 Este projeto oferece uma CLI (Command Line Interface) para automatizar tarefas comuns em ambientes DevOps:
 
-| Funcionalidade       | Descrição                                                       |
-| -------------------- | --------------------------------------------------------------- |
-| 💾 **Backup**        | Backup de diretórios com opção de compactação ZIP               |
-| 🔧 **Ferramentas**   | Verificação de ferramentas instaladas (Git, Docker, Node, etc.) |
-| 📊 **Monitoramento** | Monitoramento de CPU, memória e disco                           |
-| 📁 **Projetos**      | Criação de estrutura padrão de projetos DevOps                  |
-| 🐳 **Docker**        | Automação de operações com containers                           |
-| 🔀 **Git**           | Automação de comandos Git                                       |
+| Funcionalidade       | Descrição                                         |
+| -------------------- | ------------------------------------------------- |
+| 💾 **Backup**        | Backup de diretórios com opção de compactação ZIP |
+| 📊 **Monitoramento** | Monitoramento de CPU, memória e disco             |
+| 📁 **Projetos**      | Criação de estrutura padrão de projetos DevOps    |
+| 🐳 **Docker**        | Automação de operações com containers             |
 
 ---
 
@@ -171,10 +169,10 @@ devops-python/
 
 ```bash
 # Executar testes
-pytest tests/ -v
+pytest -v
 
 # Com relatório de cobertura
-pytest tests/ --cov=utils --cov-report=html
+pytest --cov=utils --cov-report=html
 ```
 
 ---
