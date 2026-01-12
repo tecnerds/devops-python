@@ -12,7 +12,7 @@ from datetime import datetime
 def configurar_logger(
     nome: str = "devops_automation",
     nivel: int = logging.INFO,
-    arquivo_log: str = "devops_automation.log",
+    arquivo_log: str = None,
     formato: str = "%(asctime)s - %(levelname)s - %(message)s"
 ) -> logging.Logger:
     """
@@ -21,7 +21,7 @@ def configurar_logger(
     Args:
         nome: Nome do logger
         nivel: Nível de logging (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-        arquivo_log: Nome do arquivo de log
+        arquivo_log: Nome do arquivo de log (default: logs/<nome>.log)
         formato: Formato das mensagens de log
         
     Returns:
@@ -34,6 +34,16 @@ def configurar_logger(
         return logger
     
     logger.setLevel(nivel)
+    
+    # Criar diretório de logs se não existir
+    logs_dir = Path(__file__).parent.parent / "logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Definir arquivo de log
+    if arquivo_log is None:
+        arquivo_log = logs_dir / f"{nome}.log"
+    else:
+        arquivo_log = logs_dir / arquivo_log
     
     # Formatter
     formatter = logging.Formatter(formato)
