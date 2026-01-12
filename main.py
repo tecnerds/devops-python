@@ -10,6 +10,11 @@ import sys
 import json
 import argparse
 
+# Configurar encoding para Windows
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 # Importar módulos do projeto
 from utils.logger import configurar_logger
 from utils.backup import realizar_backup, listar_backups, limpar_backups_antigos
@@ -69,66 +74,66 @@ def main():
     args = parser.parse_args()
     
     print("=" * 60)
-    print("  AUTOMAÇÃO DEVOPS COM PYTHON")
+    print("  AUTOMACAO DEVOPS COM PYTHON")
     print("=" * 60)
     
     verificar_python_version()
     
     if args.acao == 'info':
         info = obter_informacoes_sistema()
-        print("\n📋 Informações do Sistema:")
+        print("\n[INFO] Informacoes do Sistema:")
         print(json.dumps(info, indent=2, ensure_ascii=False))
         
     elif args.acao == 'ferramentas':
-        print("\n🔧 Verificando ferramentas DevOps...")
+        print("\n[TOOLS] Verificando ferramentas DevOps...")
         verificar_ferramentas_devops()
         
     elif args.acao == 'criar-projeto':
-        print(f"\n📁 Criando projeto: {args.projeto}")
+        print(f"\n[PROJECT] Criando projeto: {args.projeto}")
         criar_estrutura_projeto(args.projeto)
         
     elif args.acao == 'listar':
-        print(f"\n📂 Listando arquivos em: {args.diretorio}")
+        print(f"\n[FILES] Listando arquivos em: {args.diretorio}")
         arquivos = gerenciar_arquivos(args.diretorio, '.py')
         for arq in arquivos[:10]:
             print(f"  - {arq['nome']} ({arq['tamanho']} bytes)")
             
     elif args.acao == 'monitorar':
-        print("\n📊 Monitoramento de recursos:")
+        print("\n[MONITOR] Monitoramento de recursos:")
         recursos = monitorar_recursos()
         print(json.dumps(recursos, indent=2))
         
     elif args.acao == 'backup':
-        print(f"\n💾 Realizando backup de: {args.diretorio}")
+        print(f"\n[BACKUP] Realizando backup de: {args.diretorio}")
         resultado = realizar_backup(
             diretorio_origem=args.diretorio,
             diretorio_destino=args.destino,
             compactar=args.compactar
         )
         if resultado["sucesso"]:
-            print(f"✓ Backup salvo em: {resultado['destino']}")
+            print(f"[OK] Backup salvo em: {resultado['destino']}")
             print(f"  Arquivos: {resultado['arquivos_copiados']}")
             print(f"  Tamanho: {resultado['tamanho_total'] / 1024:.2f} KB")
         else:
-            print(f"✗ Erro: {resultado['erro']}")
+            print(f"[ERRO] Erro: {resultado['erro']}")
             
     elif args.acao == 'listar-backups':
-        print(f"\n📋 Listando backups em: {args.destino}")
+        print(f"\n[LIST] Listando backups em: {args.destino}")
         backups = listar_backups(args.destino)
         for backup in backups:
             print(f"  - {backup['nome']} ({backup['tipo']}, {backup['tamanho'] / 1024:.2f} KB)")
             
     elif args.acao == 'limpar-backups':
-        print(f"\n🧹 Limpando backups antigos (>{args.dias} dias)")
+        print(f"\n[CLEAN] Limpando backups antigos (>{args.dias} dias)")
         resultado = limpar_backups_antigos(args.destino, dias=args.dias)
         if resultado["sucesso"]:
-            print(f"✓ Removidos: {len(resultado['removidos'])} backups")
-            print(f"  Espaço liberado: {resultado['espaco_liberado'] / 1024:.2f} KB")
+            print(f"[OK] Removidos: {len(resultado['removidos'])} backups")
+            print(f"  Espaco liberado: {resultado['espaco_liberado'] / 1024:.2f} KB")
         else:
-            print(f"✗ Erro: {resultado['erro']}")
+            print(f"[ERRO] Erro: {resultado['erro']}")
     
     print("\n" + "=" * 60)
-    print("  Execução finalizada!")
+    print("  Execucao finalizada!")
     print("=" * 60)
     
     return 0

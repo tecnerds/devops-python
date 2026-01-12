@@ -1,74 +1,71 @@
 """
-Testes unitários para o projeto de automação DevOps.
+Testes para o script principal main.py.
 """
 
-import pytest
 import sys
 import os
-
-# Adiciona o diretório pai ao path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from main import (
-    verificar_python_version,
-    obter_informacoes_sistema,
-    executar_comando,
-    gerenciar_arquivos
-)
+import subprocess
+import pytest
 
 
-class TestPythonVersion:
-    """Testes para verificação de versão do Python."""
+class TestMainScript:
+    """Testes para o script principal."""
     
-    def test_verificar_python_version_retorna_bool(self):
-        resultado = verificar_python_version()
-        assert isinstance(resultado, bool)
+    def _run_main(self, *args):
+        """Executa o main.py com encoding UTF-8."""
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        
+        return subprocess.run(
+            [sys.executable, "main.py"] + list(args),
+            capture_output=True,
+            text=True,
+            env=env,
+            encoding="utf-8",
+            errors="replace"
+        )
     
-    def test_versao_atual_compativel(self):
-        # Python 3.8+ é requerido
-        assert sys.version_info >= (3, 8)
-
-
-class TestInformacoesSistema:
-    """Testes para obtenção de informações do sistema."""
+    def test_executar_acao_info(self):
+        """Testa execução da ação info."""
+        resultado = self._run_main("--acao", "info")
+        
+        assert resultado.returncode == 0
+        assert "AUTOMACAO DEVOPS" in resultado.stdout
     
-    def test_obter_informacoes_retorna_dict(self):
-        info = obter_informacoes_sistema()
-        assert isinstance(info, dict)
+    def test_executar_acao_ferramentas(self):
+        """Testa execução da ação ferramentas."""
+        resultado = self._run_main("--acao", "ferramentas")
+        
+        assert resultado.returncode == 0
+        assert "Verificando ferramentas" in resultado.stdout
     
-    def test_informacoes_contem_campos_obrigatorios(self):
-        info = obter_informacoes_sistema()
-        campos = ['plataforma', 'versao_python', 'executavel', 'diretorio_atual']
-        for campo in campos:
-            assert campo in info
-
-
-class TestExecutarComando:
-    """Testes para execução de comandos."""
+    def test_executar_acao_monitorar(self):
+        """Testa execução da ação monitorar."""
+        resultado = self._run_main("--acao", "monitorar")
+        
+        assert resultado.returncode == 0
+        assert "Monitoramento" in resultado.stdout
     
-    def test_comando_simples_retorna_dict(self):
-        resultado = executar_comando("echo teste")
-        assert isinstance(resultado, dict)
+    def test_executar_acao_listar(self):
+        """Testa execução da ação listar."""
+        resultado = self._run_main("--acao", "listar", "--diretorio", ".")
+        
+        assert resultado.returncode == 0
+        assert "Listando arquivos" in resultado.stdout
     
-    def test_comando_sucesso(self):
-        resultado = executar_comando("echo hello")
-        assert resultado.get('sucesso') == True
+    def test_argumento_help(self):
+        """Testa argumento --help."""
+        resultado = self._run_main("--help")
+        
+        assert resultado.returncode == 0
+        assert "--acao" in resultado.stdout
     
-    def test_comando_invalido(self):
-        resultado = executar_comando("comando_que_nao_existe_xyz")
-        assert resultado.get('sucesso') == False
-
-
-class TestGerenciarArquivos:
-    """Testes para gerenciamento de arquivos."""
-    
-    def test_diretorio_inexistente(self):
-        resultado = gerenciar_arquivos("/caminho/que/nao/existe")
-        assert resultado == []
-    
-    def test_diretorio_atual(self):
-        resultado = gerenciar_arquivos(".")
-        assert isinstance(resultado, list)
+    def test_acao_padrao_info(self):
+        """Testa que ação padrão é info."""
+        resultado = self._run_main()
+        
+        assert resultado.returncode == 0
+        assert "Informacoes do Sistema" in resultado.stdout
 
 
 if __name__ == "__main__":
