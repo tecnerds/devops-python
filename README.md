@@ -102,6 +102,46 @@ python main.py --acao criar-projeto --projeto meu-novo-projeto
 
 ---
 
+## 🎯 Como usar via docker
+
+# Informações do sistema
+
+```bash
+docker run --rm devops-automation --acao info
+```
+
+# Verificar ferramentas
+
+```bash
+docker run --rm devops-automation --acao ferramentas
+```
+
+# Monitorar recursos
+
+```bash
+docker run --rm devops-automation --acao monitorar
+```
+
+# Realizar backup (montando volumes)
+
+```bash
+docker run --rm \
+    -v /caminho/origem:/data/origem:ro \
+    -v /caminho/backups:/app/backups \
+    devops-automation --acao backup --diretorio /data/origem --destino /app/backups
+```
+
+# Backup compactado
+
+```bash
+docker run --rm \
+ -v /caminho/origem:/data/origem:ro \
+ -v /caminho/backups:/app/backups \
+ devops-automation --acao backup --diretorio /data/origem --destino /app/backups --compactar
+```
+
+---
+
 ## 📂 Estrutura do Projeto
 
 ```
