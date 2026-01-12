@@ -1,30 +1,69 @@
-# Dependências do Projeto - Automação DevOps com Python
-# =====================================================
-
-# Testes
-pytest>=7.4.0
-pytest-cov>=4.1.0
-
-# Utilitários
-python-dotenv>=1.0.0
-requests>=2.31.0
-
-# Monitoramento de Sistema
-psutil>=5.9.0
-
-# CLI
-click>=8.1.0
-rich>=13.0.0
-
-# YAML/JSON
-pyyaml>=6.0.1
-
-# Docker SDK (opcional)
-# docker>=6.1.0
-
-# AWS SDK (opcional)
-# boto3>=1.34.0
-
-# Linting
-flake8>=6.1.0
-black>=23.12.0
+alembic==1.14.0
+asn1crypto==1.5.1
+bcrypt==4.2.1
+black==25.1.0
+blinker==1.9.0
+certifi==2024.12.14
+charset-normalizer==3.4.1
+click==8.1.7
+colorama==0.4.6
+contourpy==1.3.1
+coverage==7.6.10
+cycler==0.12.1
+Cython==3.0.12
+docopt==0.6.2
+Flask==3.1.0
+Flask-Cors==5.0.0
+flask-marshmallow==1.2.1
+Flask-Migrate==4.0.7
+Flask-SQLAlchemy==3.1.1
+fonttools==4.55.8
+git-filter-repo==2.47.0
+idna==3.10
+iniconfig==2.0.0
+itsdangerous==2.2.0
+Jinja2==3.1.4
+joblib==1.4.2
+kiwisolver==1.4.8
+ldap3==2.9.1
+Mako==1.3.8
+MarkupSafe==3.0.2
+marshmallow==3.23.1
+marshmallow-sqlalchemy==1.4.0
+matplotlib==3.10.0
+mypy-extensions==1.0.0
+numpy==2.2.2
+packaging==24.2
+pandas==2.2.3
+pathspec==0.12.1
+pillow==11.1.0
+pipreqs==0.4.13
+platformdirs==4.3.6
+pluggy==1.5.0
+psycopg==3.2.3
+psycopg-binary==3.2.3
+pyasn1==0.6.1
+pybind11==2.13.6
+PyJWT==2.10.1
+pyparsing==3.2.1
+pytest==8.3.4
+pytest-asyncio==0.25.2
+pytest-cov==6.0.0
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+pytz==2024.2
+requests==2.32.3
+scikit-learn==1.6.1
+scipy==1.15.1
+scramp==1.4.5
+seaborn==0.13.2
+setuptools==75.6.0
+six==1.17.0
+SQLAlchemy==2.0.36
+threadpoolctl==3.5.0
+typing_extensions==4.12.2
+tzdata==2024.2
+urllib3==2.3.0
+Werkzeug==3.1.3
+wheel==0.45.1
+yarg==0.1.10
